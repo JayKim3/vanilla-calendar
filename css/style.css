@@ -1,0 +1,117 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #363c4f;
+}
+
+ul {
+    /* list-style: none; */
+
+}
+
+.content-wrapper {
+    display: flex;
+}
+
+.content-left {
+    color: #abafbe;
+    background-color: white;
+    margin: 30px;
+    width: 60%;
+    height: 0;
+    padding-bottom: 40%;
+    border-radius: 8px;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.calendar-header h1 {
+    /* padding: 20px; */
+    text-align: center;
+}
+
+.calendar-header button {
+    margin: 20px;
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 0;
+    outline: 0;
+}
+
+.content-right {
+    /* background-color: red; */
+    width: 40%;
+    color: white;
+    margin: 30px;
+}
+
+.main-wrap {
+    display: flex;
+    justify-content: space-between;
+}
+
+.main-wrap h1,
+h2 {
+    margin: 30px;
+}
+
+.main-wrap h1 {
+    letter-spacing: 4px;
+}
+
+.main-day {
+    float: left;
+    left: 0;
+}
+
+.main-date {
+    right: 0;
+}
+
+.main-date {
+    opacity: .5;
+    font-style: italic;
+}
+
+.todo-title {
+    text-align: center;
+    letter-spacing: 7px;
+}
+
+.input-wrap {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.input-wrap input {
+    width: 200px;
+    height: 20px;
+    border-radius: 5px;
+    border: 0;
+    outline: 0;
+    color: gray;
+}
+
+.input-wrap button {
+    width: 50px;
+    height: 20px;
+    margin-left: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.todo-list li {
+    margin-bottom: 10px;
+}
+
+.todo-list li span {
+    display: block;
+    opacity: .5;
+    font-size: 14px;
+    margin-top: 10px;
+}

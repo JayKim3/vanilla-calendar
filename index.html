@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vanilla Calendar</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+
+<body>
+    <div id="App">
+        <div class="content-wrapper">
+            <section class="content-left">
+                <header class="calendar-header">
+                    <button>
+                        <</button> <h1>March 2020</h1>
+                            <button>></button>
+                </header>
+                <table id="calendar"></table>
+            </section>
+            <section class="content-right">
+                <div class="main-wrap">
+                    <h1 class="main-day">Thursday</h1>
+                    <h2 class="main-date">19th March 2020</h2>
+                </div>
+                <div class="todo-wrap">
+                    <h1 class="todo-title">Todo-title</h1>
+                    <div class="input-wrap">
+                        <input type="text" />
+                        <button>추가</button>
+                    </div>
+                    <ul class="todo-list">
+                        <li>할 일 1<span>14:00 PM ~ 16:30PM</span></li>
+                        <li>할 일 2<span>17:00PM ~ 17:30 PM</span></li>
+                        <li>할 일 3<span>18:00 PM ~ 18:30 PM</span></li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </div>
+    <script type="module" src="./js/main.js">
+    </script>
+
+</body>
+
+</html>
