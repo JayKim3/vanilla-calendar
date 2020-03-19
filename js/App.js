@@ -1,16 +1,17 @@
 // import dummyData from "./dummyData.js";
 import Calendar from "./Calendar.js";
-import TodoList from "./todo/TodoList.js";
+import TodoHeader from "./todo/TodoHeader.js";
 
 class App {
   $target = null;
-  constructor($target) {
-    this.$target = $target;
-
+  constructor() {
     this.Calendar = new Calendar({
-      $target,
-      initialDate: Date()
+      initialDate: new Date()
     });
+
+    this.TodoHeader = new TodoHeader({});
+
+    this.Calendar.setState("");
   }
 }
 

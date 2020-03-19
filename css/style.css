@@ -1,12 +1,11 @@
+@import "calendar.css";
+@import "todo.css";
+
 body {
     margin: 0;
     padding: 0;
     background-color: #363c4f;
-}
-
-ul {
-    /* list-style: none; */
-
+    color: #fff;
 }
 
 .content-wrapper {
@@ -19,34 +18,12 @@ ul {
     margin: 30px;
     width: 60%;
     height: 0;
-    padding-bottom: 40%;
+    padding-bottom: 45%;
     border-radius: 8px;
 }
 
-.calendar-header {
-    display: flex;
-    justify-content: space-between;
-}
-
-.calendar-header h1 {
-    /* padding: 20px; */
-    text-align: center;
-}
-
-.calendar-header button {
-    margin: 20px;
-    width: 30px;
-    height: 30px;
-    border-radius: 4px;
-    cursor: pointer;
-    border: 0;
-    outline: 0;
-}
-
 .content-right {
-    /* background-color: red; */
     width: 40%;
-    color: white;
     margin: 30px;
 }
 
@@ -114,4 +91,12 @@ h2 {
     opacity: .5;
     font-size: 14px;
     margin-top: 10px;
+}
+
+
+@media (prefers-color-scheme: white) {
+    body {
+        background-color: #fff;
+        color: #363c4f;
+    }
 }
