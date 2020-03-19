@@ -4,3 +4,16 @@
     cursor: pointer;
     border-radius: 4px;
 }
+
+
+.todo-list li {
+    margin: 20px 0 0 20px;
+
+}
+
+.todo-list li span {
+    display: block;
+    opacity: .5;
+    font-size: 14px;
+    margin-top: 10px;
+}

@@ -1,36 +1,34 @@
-import { $ } from "./util/index.js";
+import { $, dayArray, monthArray } from "./util/index.js";
 
 class Calendar {
-  constructor({ initialDate }) {
+  constructor({ initialDate, onClickPrevious, onClickNext, onDayClick }) {
+    const $previousBtn = $("#previousBtn");
+    const $nextBtn = $("#nextBtn");
+
     this.$thead = $("thead");
     this.$tbody = $("tbody");
     this.$currentDate = $(".currentDate");
     this.date = initialDate;
     this.year = this.date.getFullYear();
     this.month = this.date.getMonth();
+
+    this.onClickPrevious = onClickPrevious;
+    this.onClickNext = onClickNext;
+    this.onDayClick = onDayClick;
+
+    $previousBtn.addEventListener("click", this.onClickPrevious);
+    $nextBtn.addEventListener("click", this.onClickNext);
   }
 
   setState(nextData) {
+    this.date = nextData;
+    this.year = this.date.getFullYear();
+    this.month = this.date.getMonth();
     this.render();
   }
 
   createheadDays() {
-    const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
-    const monthArray = [
-      "January",
-      "Feburary",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December"
-    ];
-    const daysText = days.reduce((htmlString, currentValue) => {
+    const daysText = dayArray.reduce((htmlString, currentValue) => {
       const day = `<td>${currentValue}</td>`;
       htmlString += day;
       return `${htmlString}`;
@@ -50,6 +48,8 @@ class Calendar {
   createTable(year, month) {
     const cal = new Date(year, month, 1);
     const day = cal.getDay();
+    const nowDate = this.date.getDate();
+
     // 각 월에 대한 일수
     let date = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
@@ -73,6 +73,8 @@ class Calendar {
         tableText += "<td style='color: red'>" + i + "</td>";
       } else if (count == 6) {
         tableText += "<td style='color: blue'>" + i + "</td>";
+      } else if (i === nowDate) {
+        tableText += "<td style='background-color:purple'>" + i + "</td>";
       } else {
         tableText += "<td>" + i + "</td>";
       }
@@ -84,6 +86,7 @@ class Calendar {
     }
     tableText += "</tr>";
     this.$tbody.innerHTML = tableText;
+    this.$tbody.addEventListener("click", this.onDayClick);
   }
 
   render() {

@@ -82,16 +82,7 @@ h2 {
     cursor: pointer;
 }
 
-.todo-list li {
-    margin-bottom: 10px;
-}
 
-.todo-list li span {
-    display: block;
-    opacity: .5;
-    font-size: 14px;
-    margin-top: 10px;
-}
 
 
 @media (prefers-color-scheme: white) {
