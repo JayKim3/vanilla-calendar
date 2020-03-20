@@ -1,9 +1,10 @@
 import { $, dayArray, monthArray } from "./util/index.js";
+import { checkError } from "./validation/index.js";
 
 class Calendar {
   constructor({ initialDate, onClickPrevious, onClickNext, onDayClick }) {
-    const $previousBtn = $("#previousBtn");
-    const $nextBtn = $("#nextBtn");
+    const $previousBtn = $("#previous-btn");
+    const $nextBtn = $("#next-btn");
 
     this.$thead = $("thead");
     this.$tbody = $("tbody");
@@ -27,7 +28,7 @@ class Calendar {
     this.render();
   }
 
-  createheadDays() {
+  createTextDays() {
     const daysText = dayArray.reduce((htmlString, currentValue) => {
       const day = `<td>${currentValue}</td>`;
       htmlString += day;
@@ -35,14 +36,6 @@ class Calendar {
     }, "");
     this.$currentDate.innerHTML = `${monthArray[this.month]} ${this.year}`;
     this.$thead.innerHTML = `<tr>${daysText}</tr>`;
-  }
-
-  isLeapYear(year) {
-    if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {
-      return true;
-    } else {
-      return false;
-    }
   }
 
   createTable(year, month) {
@@ -55,16 +48,14 @@ class Calendar {
 
     let count = 0;
     //윤년여부
-    if (this.isLeapYear(year)) {
+    if (checkError.isLeapYear(this.year)) {
       //윤년인 경우
       date[1] = 29;
-    } else {
-      console.log("date: " + date[month]);
     }
 
     let tableText = "<tr>";
     for (var i = 0; i < day; i++) {
-      tableText += "<td>&nbsp</td>";
+      tableText += "<td style='cursor: not-allowed'> </td>";
       count++;
     }
 
@@ -90,7 +81,7 @@ class Calendar {
   }
 
   render() {
-    this.createheadDays();
+    this.createTextDays();
     this.createTable(this.year, this.month);
   }
 }

@@ -65,7 +65,7 @@ h2 {
     text-align: center;
 }
 
-.input-wrap input {
+.input-wrap .text-input {
     width: 200px;
     height: 20px;
     border-radius: 5px;
@@ -74,14 +74,30 @@ h2 {
     color: gray;
 }
 
+.input-wrap .time-input {
+    height: 20px;
+    margin-left: 10px;
+    border-radius: 5px;
+    border: 0;
+    outline: 0;
+}
+
 .input-wrap button {
-    width: 50px;
+    width: 60px;
     height: 20px;
     margin-left: 10px;
     border-radius: 4px;
     cursor: pointer;
 }
 
+.input-wrap button:last-child {
+    width: 100px;
+}
+
+
+.input-wrap button:hover {
+    color: skyblue;
+}
 
 
 

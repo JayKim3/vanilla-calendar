@@ -13,10 +13,10 @@
         <div class="content-wrapper">
             <section class="content-left">
                 <header class="calendar-header">
-                    <button id="previousBtn">
+                    <button id="previous-btn">
                         <</button> <h1 class="currentDate">
                             </h1>
-                            <button id="nextBtn">></button>
+                            <button id="next-btn">></button>
                 </header>
                 <table class="calendar-table">
                     <thead></thead>
@@ -33,13 +33,25 @@
                 <div class="todo-wrap">
                     <h1 class="todo-title">Todo-title</h1>
                     <div class="input-wrap">
-                        <input type="text" />
-                        <button>추가</button>
+                        <input id="text-input" class="text-input" type="text" />
+                        <input id="time-input" class="time-input" type="time" value="00:00" required>
+                        <button id="add-btn">추가</button>
+                        <button id="clear-btn">모두 삭제</button>
                     </div>
                     <ul class="todo-list">
                     </ul>
+                    <div class="todo-count"></div>
                 </div>
             </section>
+        </div>
+    </div>
+    <div class="modal-wrapper">
+
+        <div class="modal">
+            <button class="close-btn">X</button>
+            <input type="text" class="modify-input" />
+            <button class="modify-btn">수정</button>
+            <button class="cancel-btn">취소</button>
         </div>
     </div>
     <script type="module" src="./js/main.js">
