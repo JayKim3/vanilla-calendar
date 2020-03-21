@@ -1,7 +1,13 @@
-import { $ } from "../util/index.js";
+import { $, svg_xmlns, star_path } from "../util/index.js";
 
 class TodoList {
-  constructor({ initialTodo, onTodoToggle, onTodoRemove, onModifyModal }) {
+  constructor({
+    initialTodo,
+    onTodoToggle,
+    onTodoRemove,
+    onModifyModal,
+    onTodoStar
+  }) {
     const $todoList = $(".todo-list");
 
     this.$todoList = $todoList;
@@ -9,6 +15,7 @@ class TodoList {
     this.onTodoToggle = onTodoToggle;
     this.onTodoRemove = onTodoRemove;
     this.onModifyModal = onModifyModal;
+    this.onTodoStar = onTodoStar;
 
     this.onClick = e => {
       const node = e.target.nodeName;
@@ -24,6 +31,8 @@ class TodoList {
           return todo._id === Number(id) ? todo : "";
         });
         this.onModifyModal(todo, id);
+      } else if (node === "path") {
+        this.onTodoStar(id);
       }
     };
   }
@@ -36,12 +45,27 @@ class TodoList {
 
   render() {
     const todoText = this.todos.reduce((htmlString, currentValue) => {
-      const { _id, content, time, isCompleted } = currentValue;
+      const { _id, content, time, isCompleted, star } = currentValue;
       const todo = isCompleted
-        ? `<li id=${_id}>${content}<span>${time}</span><img id=${_id} name="modify" src="../image/modify.png"/><img id=${_id} name="remove" src="../image/delete.png" /></li>`
+        ? `<li id=${_id}>${content}<span>${time}</span><img id=${_id} name="modify" src="../image/modify.png"/><img id=${_id} name="remove" src="../image/delete.png" />`
         : `<li><strike id=${_id}>${content}</strike><span>${time}</span><img id=${_id} name="modify"
-         src="../image/modify.png"/><img id=${_id} name="remove" src="../image/delete.png" /></li>`;
-      htmlString += todo;
+         src="../image/modify.png"/><img id=${_id} name="remove" src="../image/delete.png" />
+        `;
+
+      const checkStar = star
+        ? `<svg xmlns=${svg_xmlns}>
+         <path id=${_id} 
+             fill = "yellow"
+             d="${star_path}"
+              transform="translate(-100)"></path>
+          </svg>`
+        : `<svg xmlns=${svg_xmlns}>
+          <path id=${_id} 
+              d="${star_path}"
+               transform="translate(-100)"></path>
+           </svg></li>`;
+
+      htmlString += todo + checkStar;
       return `${htmlString}`;
     }, "");
     this.$todoList.innerHTML = todoText;

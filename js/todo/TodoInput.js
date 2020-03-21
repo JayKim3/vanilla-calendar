@@ -24,7 +24,8 @@ class TodoInput {
         stringDate: this.nowDate(),
         content,
         time,
-        isCompleted: false
+        isCompleted: false,
+        star: false
       };
       this.onAddTodo(newTodo);
       $input.value = "";

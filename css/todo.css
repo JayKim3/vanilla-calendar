@@ -24,6 +24,16 @@
     margin-left: 10px;
 }
 
+.todo-list li svg {
+    margin-left: 20px;
+    width: 21px;
+    height: 20px;
+}
+
+.todo-list li svg path {
+    cursor: pointer;
+}
+
 .todo-count {
     text-align: center;
     font-size: 20px;

@@ -4,6 +4,7 @@ import TodoInput from "./todo/TodoInput.js";
 import TodoList from "./todo/TodoList.js";
 import TodoCount from "./todo/TodoCount.js";
 import TodoModify from "./todo/TodoModify.js";
+import { checkError } from "./validation/index.js";
 // import dummyData from "./dummyData.js";
 
 class App {
@@ -12,9 +13,9 @@ class App {
     this.year = this.date.getFullYear();
     this.month = this.date.getMonth();
     this.day = this.date.getDate();
-    this.todos = [];
-    this.dailyTodos = [];
-    this.modifytodo = "";
+
+    this.getAllTodoLocalStorage();
+    this.getDailyTodoLocalStorage();
 
     this.Calendar = new Calendar({
       initialDate: this.date,
@@ -36,6 +37,7 @@ class App {
           this.dailyTodos = this.todos.filter(todo => {
             return todo.stringDate === nowDate ? todo : "";
           });
+          this.setDailyTodoLocalStorage();
           this.TodoList.setState(this.dailyTodos);
           this.TodoCount.setState(this.dailyTodos);
           this.Calendar.setState(this.date);
@@ -49,13 +51,15 @@ class App {
 
     this.TodoInput = new TodoInput({
       initialDate: this.date,
-      initialId: this.todos.length,
+      initialId: 0,
       onAddTodo: newTodo => {
         this.todos.push(newTodo);
+        this.setAllTodoLocalStorage();
         const nowDate = this.selectedDate();
         this.dailyTodos = this.todos.filter(todo => {
           return todo.stringDate === nowDate ? todo : "";
         });
+        this.setDailyTodoLocalStorage();
         this.TodoList.setState(this.dailyTodos);
         this.TodoCount.setState(this.dailyTodos);
       }
@@ -70,6 +74,8 @@ class App {
               [(todo.isCompleted = !todo.isCompleted)]
             : todo;
         });
+        this.setAllTodoLocalStorage();
+        this.setDailyTodoLocalStorage();
         this.TodoList.setState(this.dailyTodos);
         this.TodoCount.setState(this.dailyTodos);
       },
@@ -80,11 +86,24 @@ class App {
         this.todos = this.todos.filter(todo => {
           return todo._id !== Number(id) ? todo : "";
         });
+        this.setAllTodoLocalStorage();
+        this.setDailyTodoLocalStorage();
         this.TodoList.setState(this.dailyTodos);
         this.TodoCount.setState(this.dailyTodos);
       },
       onModifyModal: (todo, id) => {
         this.TodoModify.setState(todo[0].content, id);
+      },
+      onTodoStar: id => {
+        this.dailyTodos = this.dailyTodos.filter(todo => {
+          return todo._id === Number(id)
+            ? // 밑에 코드 이해 안감
+              [(todo.star = !todo.star)]
+            : todo;
+        });
+        this.setAllTodoLocalStorage();
+        this.setDailyTodoLocalStorage();
+        this.TodoList.setState(this.dailyTodos);
       }
     });
 
@@ -105,6 +124,8 @@ class App {
         this.todos = this.todos.filter(todo => {
           return todo._id === Number(id) ? (todo.content = content) : todo;
         });
+        this.setAllTodoLocalStorage();
+        this.setDailyTodoLocalStorage();
         this.TodoList.setState(this.dailyTodos);
       }
     });
@@ -125,9 +146,40 @@ class App {
     return `${this.year}-${this.month + 1}-${this.day}`;
   }
 
+  setAllTodoLocalStorage() {
+    localStorage.setItem("todos", JSON.stringify(this.todos));
+  }
+
+  getAllTodoLocalStorage() {
+    try {
+      const todos = localStorage.getItem("todos");
+      this.todos = checkError.isNotArray(JSON.parse(todos));
+    } catch (e) {
+      this.todos = [];
+    }
+  }
+
+  setDailyTodoLocalStorage() {
+    localStorage.setItem("dailyTodos", JSON.stringify(this.dailyTodos));
+  }
+
+  getDailyTodoLocalStorage() {
+    try {
+      const dailyTodos = localStorage.getItem("dailyTodos");
+      this.dailyTodos = checkError.isNotArray(JSON.parse(dailyTodos));
+    } catch (e) {
+      this.dailyTodos = [];
+    }
+  }
+
   render() {
     this.Calendar.setState(this.date);
-    this.TodoList.setState(this.todos);
+    this.TodoHeader.setState(this.date);
+    const nowDate = this.selectedDate();
+    this.dailyTodos = this.todos.filter(todo => {
+      return todo.stringDate === nowDate ? todo : "";
+    });
+    this.TodoList.setState(this.dailyTodos);
     this.TodoCount.setState(this.dailyTodos);
   }
 }

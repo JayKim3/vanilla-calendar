@@ -60,12 +60,12 @@ class Calendar {
     }
 
     for (let i = 1; i <= date[month]; i++) {
-      if (count == 0) {
+      if (i === nowDate) {
+        tableText += "<td style='background-color:purple'>" + i + "</td>";
+      } else if (count == 0) {
         tableText += "<td style='color: red'>" + i + "</td>";
       } else if (count == 6) {
         tableText += "<td style='color: blue'>" + i + "</td>";
-      } else if (i === nowDate) {
-        tableText += "<td style='background-color:purple'>" + i + "</td>";
       } else {
         tableText += "<td>" + i + "</td>";
       }

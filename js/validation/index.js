@@ -21,5 +21,10 @@ export const checkError = {
     } else {
       return false;
     }
+  },
+  isNotArray(todos) {
+    if (!Array.isArray(todos)) {
+      throw new Error("데이터 타입이 배열이 아닙니다.");
+    } else return todos;
   }
 };
