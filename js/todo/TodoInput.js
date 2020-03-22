@@ -2,14 +2,16 @@ import { $, ENTER_KEY } from "../util/index.js";
 import { checkError } from "../validation/index.js";
 
 class TodoInput {
-  constructor({ initialDate, initialId, onAddTodo }) {
+  constructor({ initialDate, initialId, onAddTodo, onAllRemoveTodo }) {
     const $input = $("#text-input");
     const $Time = $("#time-input");
     const $addBtn = $("#add-btn");
+    const $clearBtn = $("#clear-btn");
 
     this.date = initialDate;
     this.initialId = initialId;
     this.onAddTodo = onAddTodo;
+    this.onAllRemoveTodo = onAllRemoveTodo;
 
     $input.placeholder = "할 일을 입력해주세요";
 
@@ -46,6 +48,8 @@ class TodoInput {
         this.checkInputTodo(content, time);
       }
     });
+
+    $clearBtn.addEventListener("click", this.onAllRemoveTodo);
   }
 
   nowDate() {

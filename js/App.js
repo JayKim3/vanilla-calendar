@@ -13,12 +13,14 @@ class App {
     this.year = this.date.getFullYear();
     this.month = this.date.getMonth();
     this.day = this.date.getDate();
+    this.nowMonth = this.date.getMonth();
 
     this.getAllTodoLocalStorage();
     this.getDailyTodoLocalStorage();
 
     this.Calendar = new Calendar({
       initialDate: this.date,
+      nowMonth: this.nowMonth,
       onClickPrevious: () => {
         this.month = this.date.getMonth();
         this.date.setMonth(this.month - 1);
@@ -62,6 +64,17 @@ class App {
         this.setDailyTodoLocalStorage();
         this.TodoList.setState(this.dailyTodos);
         this.TodoCount.setState(this.dailyTodos);
+      },
+      onAllRemoveTodo: () => {
+        // 현재 todos에 있는 dailyTodos를 지워줘야함
+
+        console.log(this.todos);
+
+        this.dailyTodos = [];
+        this.TodoList.setState(this.dailyTodos);
+        this.TodoCount.setState(this.dailyTodos);
+        this.setAllTodoLocalStorage();
+        this.setDailyTodoLocalStorage();
       }
     });
 
@@ -92,7 +105,7 @@ class App {
         this.TodoCount.setState(this.dailyTodos);
       },
       onModifyModal: (todo, id) => {
-        this.TodoModify.setState(todo[0].content, id);
+        this.TodoModify.setState(this.date, todo[0].content, id);
       },
       onTodoStar: id => {
         this.dailyTodos = this.dailyTodos.filter(todo => {
@@ -117,6 +130,7 @@ class App {
     });
 
     this.TodoModify = new TodoModify({
+      modalDate: this.selectedDate,
       onTodoModify: (content, id) => {
         this.dailyTodos = this.dailyTodos.filter(todo => {
           return todo._id === Number(id) ? (todo.content = content) : todo;

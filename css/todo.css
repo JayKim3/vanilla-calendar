@@ -52,7 +52,7 @@
 
 .modal {
     width: 50%;
-    height: 30%;
+    height: 40%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -75,11 +75,24 @@
     cursor: pointer;
 }
 
+.modal .modal-header {
+    color: black;
+}
+
+.modal .modal-header h1 {
+    text-align: center;
+}
+
+.modal .modal-header h2 {
+    font-style: italic;
+    opacity: .5;
+}
+
 .modal input {
-    width: 200px;
+    width: 300px;
     height: 30px;
+    margin-bottom: 10px;
     border-radius: 5px;
-    margin-top: 25px;
     background-color: #b489de;
     border: 0;
     outline: 0;
@@ -88,7 +101,7 @@
 
 .modal .modify-btn,
 .modal .cancel-btn {
-    margin-top: 10px;
+    margin-top: 15px;
     width: 100px;
     height: 30px;
     border-radius: 4px;

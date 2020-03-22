@@ -2,7 +2,13 @@ import { $, dayArray, monthArray } from "./util/index.js";
 import { checkError } from "./validation/index.js";
 
 class Calendar {
-  constructor({ initialDate, onClickPrevious, onClickNext, onDayClick }) {
+  constructor({
+    initialDate,
+    nowMonth,
+    onClickPrevious,
+    onClickNext,
+    onDayClick
+  }) {
     const $previousBtn = $("#previous-btn");
     const $nextBtn = $("#next-btn");
 
@@ -10,6 +16,7 @@ class Calendar {
     this.$tbody = $("tbody");
     this.$currentDate = $(".currentDate");
     this.date = initialDate;
+    this.nowMonth = nowMonth;
     this.year = this.date.getFullYear();
     this.month = this.date.getMonth();
 
@@ -60,7 +67,7 @@ class Calendar {
     }
 
     for (let i = 1; i <= date[month]; i++) {
-      if (i === nowDate) {
+      if (i === nowDate && month === this.nowMonth) {
         tableText += "<td style='background-color:purple'>" + i + "</td>";
       } else if (count == 0) {
         tableText += "<td style='color: red'>" + i + "</td>";
