@@ -8,6 +8,7 @@
 .todo-list li {
     display: flex;
     margin: 20px 0 0 20px;
+    word-break: break-all;
 }
 
 .todo-list img {
@@ -107,4 +108,76 @@
     border-radius: 4px;
     cursor: pointer;
     outline: 0;
+}
+
+
+.todo-title {
+    text-align: center;
+    letter-spacing: 7px;
+}
+
+.input-wrap {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.input-wrap .text-input {
+    width: 200px;
+    height: 20px;
+    border-radius: 5px;
+    border: 0;
+    outline: 0;
+    color: gray;
+}
+
+.input-wrap .time-input {
+    height: 20px;
+    margin-left: 10px;
+    border-radius: 5px;
+    border: 0;
+    outline: 0;
+}
+
+.input-wrap button {
+    width: 60px;
+    height: 20px;
+    margin-left: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.input-wrap button:last-child {
+    width: 100px;
+}
+
+
+.input-wrap button:hover {
+    color: skyblue;
+}
+
+
+@media(max-width:992px) {
+
+    .main-day,
+    .main-date {
+        font-size: 18px;
+    }
+
+    .input-wrap {
+        width: 350px;
+    }
+
+    .input-wrap button {
+        margin-top: 20px;
+    }
+}
+
+@media(max-width:768px) {
+    .content-wrapper {
+        flex-direction: column;
+    }
+
+    .content-right {
+        min-width: 100%;
+    }
 }

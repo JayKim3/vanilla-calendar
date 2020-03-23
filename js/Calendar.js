@@ -84,6 +84,7 @@ class Calendar {
     }
     tableText += "</tr>";
     this.$tbody.innerHTML = tableText;
+    // Event delegation
     this.$tbody.addEventListener("click", this.onDayClick);
   }
 

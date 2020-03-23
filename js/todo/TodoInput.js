@@ -17,8 +17,8 @@ class TodoInput {
 
     this.checkInputTodo = (content, time) => {
       checkError.isEmptyText(content);
-      checkError.isTime(time);
-
+      time = checkError.isTime(time);
+      console.log(time);
       this.initialId += 1;
 
       const newTodo = {

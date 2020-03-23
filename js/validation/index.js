@@ -2,9 +2,11 @@
 export const checkError = {
   isTime(time) {
     if (time >= "00:00" && time < "12:00") {
-      return (time += " AM");
+      time += " AM";
+      return time;
     } else if (time >= "12:00" && time < "24:00") {
-      return (time += " PM");
+      time += " PM";
+      return time;
     } else {
       throw new Error("시간 형식이 올바르지 않습니다");
     }

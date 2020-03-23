@@ -67,9 +67,22 @@ class App {
       },
       onAllRemoveTodo: () => {
         // 현재 todos에 있는 dailyTodos를 지워줘야함
+        const newTodo = [];
+        this.todos.map(todo => {
+          this.dailyTodos.filter(dailyTodo => {
+            todo = todo._id !== dailyTodo._id ? todo : false;
+          });
+          newTodo.push(todo);
+        });
 
-        console.log(this.todos);
+        newTodo.map(() => {
+          const search = newTodo.indexOf(false);
+          if (search !== -1) {
+            newTodo.splice(search, 1);
+          }
+        });
 
+        this.todos = newTodo;
         this.dailyTodos = [];
         this.TodoList.setState(this.dailyTodos);
         this.TodoCount.setState(this.dailyTodos);
